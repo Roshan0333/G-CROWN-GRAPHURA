@@ -211,6 +211,7 @@ const handleBuyNow = () => {
       setReviewComment("");
 
       alert("Review added successfully!");
+      window.location.reload();
     } catch (err) {
       console.error(err);
       alert(err?.response?.data?.message || "Failed to add review");
@@ -529,7 +530,7 @@ const handleBuyNow = () => {
                         <Star key={i} size={20} fill="currentColor" />
                       ))}
                     </div>
-                    <p className="text-gray-400 text-xs">(248 reviews)</p>
+                    <p className="text-gray-400 text-xs">({Array.isArray(product.reviews) ? product.reviews.length : product.reviews} reviews)</p>
                   </div>
 
                   <div className="flex-1 space-y-2 w-full max-w-md">
