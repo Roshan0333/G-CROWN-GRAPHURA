@@ -22,6 +22,23 @@ const getAllProducts = async (req, res) => {
     }
 };
 
+const getProductById = async (req, res) => {
+    try{
+        const {productId} = req.query;
+
+        const productDetails = await productModel.findById(productId);
+
+        if(!productDetails){
+            return res.status(404).json(new ApiError(404, "Product not found."));
+        }
+
+        return res.status(200).json(new ApiResponse(200, productDetails, "Successful"));
+    }
+    catch(err){
+        return res.status(500).json(new ApiError(500, err.message, [{message: err.message, name: err.name}]));
+    }
+}
+
 const newArrivalProducts = async (req, res) => {
     try{
         let productList = await productModel.find({
@@ -105,4 +122,4 @@ const getProductReviews = async (req, res) => {
     }
 };
 
-export { getAllProducts, addReview, getProductReviews, newArrivalProducts};
+export { getAllProducts, getProductById, addReview, getProductReviews, newArrivalProducts};

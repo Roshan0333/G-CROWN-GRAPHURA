@@ -145,7 +145,8 @@ const SignIn = () => {
     }
   };
 
-  const resendOtp = async () => {
+  const resendOtp = async (e) => {
+    e.preventDefault()
     const apiResponse = await axiosPostService(
       "/customer/auth/forgetPasswordOtp",
       { email }
@@ -359,7 +360,7 @@ const SignIn = () => {
                   <SubmitButton isLoading={isLoading} label="Verify & Update Password" />
 
                   <p className="text-center text-[13px] text-gray-400">
-                    Didn't receive the code? <button type="button" className="text-[#1E3A2F] font-bold underline" onClick={resendOtp}>Resend Code</button>
+                    Didn't receive the code? <button type="button" className="text-[#1E3A2F] font-bold underline" onClick={(e) => {resendOtp(e)}}>Resend Code</button>
                   </p>
                 </form>
               </motion.div>
